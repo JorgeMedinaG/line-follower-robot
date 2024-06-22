@@ -1,0 +1,22 @@
+<launch>
+  <arg name="model" default="$(find quad_wheel_robot_6)/urdf/quad_wheel_robot_6_motor.urdf"/>
+  <include file="$(find quad_wheel_robot_6)/launch/gazebo_motor.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>
+
+  <rosparam command="load"
+            file="$(find quad_wheel_robot_6)/config/joints.yaml"
+            ns="r2d2_joint_state_controller" />
+
+  <rosparam command="load"
+            file="$(find quad_wheel_robot_6)/config/diffdrive.yaml"
+            ns="r2d2_diff_drive_controller" />
+
+  <node name="r2d2_controller_spawner" pkg="controller_manager" type="spawner"
+    args="r2d2_joint_state_controller
+          r2d2_diff_drive_controller"/>
+
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="/r2d2_diff_drive_controller/cmd_vel"/>
+  </node>
+</launch>

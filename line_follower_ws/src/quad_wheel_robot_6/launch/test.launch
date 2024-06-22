@@ -1,0 +1,22 @@
+<launch>
+  <!-- Load the robot description parameter -->
+  <param name="robot_description" command="cat $(find quad_wheel_robot_6)/urdf/quad_wheel_robot_6.urdf" />
+
+  <!-- Load the controller configurations -->
+  <rosparam file="$(find quad_wheel_robot_6)/config/controller.yaml" command="load" />
+
+  <!-- Launch Gazebo with the appropriate world file -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- Start the controller manager -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="diff_drive_controller joint_state_controller" />
+
+
+</launch>

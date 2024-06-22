@@ -1,0 +1,6 @@
+gazebo_ros_control/pid_gains:
+  shoulder_joint: {p: 1.0, i: 0.0, d: 1.0}
+  left_rear_wheel_joint: {p: 1.0, i: 0.0, d: 1.0}
+  right_rear_wheel_joint: {p: 1.0, i: 0.0, d: 1.0}
+  left_front_wheel_joint: {p: 1.0, i: 0.0, d: 1.0}
+  right_front_wheel_joint: {p: 1.0, i: 0.0, d: 1.0}
