@@ -2,23 +2,22 @@
 
 - [Introduction](#introduction)
 - [Overview](#overview)
-    - [Tools](#tools)
     - [Folder Structure](#folder-structure)
+    - [Folder Annotation](#folder-annotation)
 - [Installation](#installation)
 - [Code Explanation](#code-explanations)
+- [Dependencies](#dependencies)
+- [Conclusion](#conclusion)
 
 ## Introduction
+
 This repository contains the implementation of a line-following algorithm for a four-wheel robot integrated with ROS. The robot uses a differential motion model and relies on a camera to capture the line it needs to follow, adjusting its movement based on the line's position.
+
+![animation](./docs/images/simulation.gif)
 
 ## Overview
 
-
-### Tools 
-
-- Docker (version 24.0.4, build 3713ee1)
-- Ros (Distro: Noetic, Version: 1.16.0)
-- Gazebo (version 11)
-- Python (version 3.8.10)
+This section contains some definition about the general architecture/structure of the project and the responsibility of each item. 
 
 ### Folder Structure
 
@@ -67,7 +66,8 @@ Following folder tree shows how our repo structures
 └── Readme.md
 ```
 
-Folder annotation:
+### Folder Annotation
+
 - `docker`: Containing docker setup for this implementation
 - `docs`: Contain detail documents
 - `line_follower_ws`: catkin working space 
@@ -121,8 +121,42 @@ python3 line_follower_ws/follow_line.py
 
 ## Code Explanations
 
-A detailed code explanation of the different components of this projects can be found in the following links: 
+A detailed code explanation of the different components of this project where full description, key variables, algorithmic steps, functions and examples are explained, can be found in the following links:
 
  - [URDF](./docs/urdf.md)
  - [Gazebo Settings](./docs/gazebo.md)
  - [Control Algorithm](./docs/algorithm.md)
+ - [Launch File](./docs/launch_file.md)
+
+## Dependencies 
+
+Overall the tools used to develop the project are: 
+
+- Docker (version 24.0.4, build 3713ee1)
+- Ros (Distro: Noetic, Version: 1.16.0)
+- Gazebo (version 11)
+- Python (version 3.8.10)
+- Solidworks (version 2023)
+
+The Python libraries used are: 
+
+- OpenCV
+- Rospy
+- Numpy 
+- Pillow
+
+## Conclusion
+
+From the information written above, it's explained the process of how this autonomous system was built, what's the logic and the functions of each of its components and finally how to install and run for everyone with access to this repo. Some of its key points are: 
+
+- Model and URDF configuration: for creating the vehicle with the given requirements.
+- Gazebo World customization: to simulate and environment in which the robot should work.
+- Launch File creation: to integrate custom components and launch with ROS and Gazebo.
+- Control Algorithm: to integrate data coming from Gazebo and control the autonomous system.
+
+We consider the task given successfully completed since all the steps below were fulfilled.
+
+## Authors 
+
+@huyhoang251296
+@JorgeMedinaG
