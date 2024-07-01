@@ -8,6 +8,7 @@
 - [Code Explanation](#code-explanations)
 - [Dependencies](#dependencies)
 - [Conclusion](#conclusion)
+- [Authors](#authors)
 
 ## Introduction
 
@@ -149,14 +150,14 @@ The Python libraries used are:
 
 From the information written above, it's explained the process of how this autonomous system was built, what's the logic and the functions of each of its components and finally how to install and run for everyone with access to this repo. Some of its key points are: 
 
-- Model and URDF configuration: for creating the vehicle with the given requirements.
-- Gazebo World customization: to simulate and environment in which the robot should work.
-- Launch File creation: to integrate custom components and launch with ROS and Gazebo.
-- Control Algorithm: to integrate data coming from Gazebo and control the autonomous system.
+- `Model and URDF configuration`: for creating the vehicle with the given requirements.
+- `Gazebo World customization`: to simulate and environment in which the robot should work.
+- `Launch File creation`: to integrate custom components and launch with ROS and Gazebo.
+- `Control Algorithm`: to integrate data coming from Gazebo and control the autonomous system.
 
 We consider the task given successfully completed since all the steps below were fulfilled.
 
 ## Authors 
 
-@huyhoang251296
-@JorgeMedinaG
+[@huyhoang251296](https://github.com/huyhoang251296/)  
+[@JorgeMedinaG](https://github.com/JorgeMedinaG)  
