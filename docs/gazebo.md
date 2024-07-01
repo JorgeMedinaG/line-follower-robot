@@ -36,7 +36,7 @@ A [Gazebo World](https://classic.gazebosim.org/tutorials?tut=build_world) is def
 
 A world file [course.world](../line_follower_ws/src/line_follower/course.world) was created following some of the values defined in out-of-the-box world files but the custom masterial previously created is inserted in this code snippet: 
 
-```
+```xml
 <visual name="ground_vis">
     <geometry>
     <box>
@@ -56,6 +56,6 @@ A world file [course.world](../line_follower_ws/src/line_follower/course.world) 
 
 To integrate the custom world in a lunch file, the following tag needs to be added in the tag that launches the empty world. 
 
-```
+```xml
 <arg name="world_name" value="$(find line_follower)/course.world"/>
 ```

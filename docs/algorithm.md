@@ -12,13 +12,13 @@ The image data is published to the ROS Topic `/rrbot/camera1/image_raw' where a 
 
 1. Subscribe to the topic and pass a callback to be applied everytime the sensor information is updated.
 
-```
+```python
 rospy.Subscriber("/rrbot/camera1/image_raw", Image, self.image_transformation_cb)
 ```
 
 2. The `image_transformation_cb` gets the raw data to a `PIL` image format and then its transformed to a `numpy` array stored in the instance variable `frame`.
 
-```
+```python
   def image_transformation_cb(self, msg):
     im_h = msg.height
     im_w = msg.width
@@ -36,12 +36,12 @@ The four-wheel vehicle is designed with a differential drive system. To control 
 
 For controlling the previously defined variables, the script publishes to the topic `/r2d2_diff_drive_controller/cmd_vel` the values of such variables. This is done in the following way: 
 
-```
+```python
 self.pub_cmd_vel = rospy.Publisher("/r2d2_diff_drive_controller/cmd_vel", Twist, queue_size=1, latch=False)
 self.velocity = Twist()
 ```
 
-```
+```python
 self.velocity.linear.x = # your linear velocity value
 self.velocity.angular.z = # your angular velocity value
 self.pub_cmd_vel.publish(self.velocity)
@@ -54,14 +54,14 @@ With the input from the camera sensor, the goal is to find the center of the tra
 
 1. The image is converted to the HSV and RGB color spaces. 
 
-```
+```python
 frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 ```
 
 2. The HSV format image, is used to filter the line track. Since the line track is yellow a mask is applied to detect the yellow items in the image. An upper and lowe bound for the yellow color is defined in the HSV color space and with the help of the `opencv` function `inRange` the yellow objects of the image are filtered. 
 
-```
+```python
 def get_color_mask(self, hsv):
     lower_yellow = np.array([ 50,  50, 170])
     upper_yellow = np.array([255, 255, 190])
@@ -74,7 +74,7 @@ def get_color_mask(self, hsv):
 
 3. As we can see the results of the previous step produces a grayscale image with the yellow objects in it (track line) in white. Next step applied is to detect the track center, for this we focus the 'vision' of the robot in a specific part of the track and this is achieved by isolating a 20 pixel height section of the image below 3/4 of its height by setting the rest of the pixels outside the section to black. Then the `opencv` function `moments` is used to detect the boundaries of the reamining sections on the image.
 
-```
+```python
 def get_track_line_center(self, image, mask):
     h, w, d = image.shape
     search_top = 3*h//4
@@ -110,14 +110,14 @@ With the results of the processing stage, the goal of the control algorithm is t
 
 For achieving this, then a pixel error is computed between the two centers previously calculated and a proportional gain is applied to produced a angular velocity signal that corrects the difference between the two visual points. For this purpose, a constant linear velocity was used. Both values are then published to the ROS Topic. 
 
-```
+```python
 def calculate_control_output(self,cx, cy):
     h, w, d = self.frame.shape
     error = w/2 - cx
     return error * 0.005
 ```
 
-```
+```python
 angular_vel = self.calculate_control_output(cx, cy)
 self.velocity.linear.x = 0.1
 self.velocity.angular.z = angular_vel
@@ -128,7 +128,7 @@ self.pub_cmd_vel.publish(self.velocity)
 
 The Python script is integrated with ROS tools by bringing it up as a ROS Node. When you execute the file it will be registered as a Node and then a loop function which contains the steps previously described will be executed. 
 
-```
+```python
 if __name__ == '__main__': 
   rospy.init_node('follower')
   follower = Follower()
