@@ -32,6 +32,7 @@ class Follower:
       cx = int(M['m10']/M['m00'])
       cy = int(M['m01']/M['m00'])
       cv2.circle(image, (cx, cy), 20, (0,0,255), -1)
+      cv2.circle(image, (w//2,cy-60), 10, (255, 0,0), -1)
       return cx, cy
     else: 
       return w//2, h//2
